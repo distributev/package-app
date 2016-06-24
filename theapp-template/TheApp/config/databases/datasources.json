@@ -1,0 +1,9 @@
+  "mailmerge": {
+    "storage": "./_internal/data/db.sqlite", //if provided then use the embedded sqllite, otherwise connect to the provide remote datase
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "table": mmerges //table where the mail-merge jobs will be stored
+  }
