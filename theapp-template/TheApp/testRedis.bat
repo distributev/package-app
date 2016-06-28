@@ -11,7 +11,7 @@ SET rootdir=%~dp0
 :: Library to parse JSON
 SET jq=%rootdir%_internal\tools\jq\jq
 :: Redis executable directory
-SET redispath=%rootdir%_internal\tools\redis2.8.2402-xp32bit\
+SET redispath=%rootdir%_internal\tools\redis2.8.2400-xp32bit\
 :: Config files
 SET redisconfig=%rootdir%config\databases\redis.json
 
