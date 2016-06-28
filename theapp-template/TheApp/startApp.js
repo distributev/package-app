@@ -4,7 +4,6 @@
 
 'use strict';
 
-const forever = require('forever-monitor');
 const fs = require('fs');
 const spawn = require('child_process').spawn;
 
@@ -26,7 +25,7 @@ redis.on('exit', (code) => {
 // Start server/app.js
 const theApp = spawn('_internal\\runtime\\nodejs\\nodejs', [
   '_internal\\app\\server\\app.js',
-]);
+],{ stdio: 'inherit' });
 setTimeout(() => {
   // Write the server/app.js pid to a file
   fs.writeFile('app.pid', theApp.pid, (err) => {

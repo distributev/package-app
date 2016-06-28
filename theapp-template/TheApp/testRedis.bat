@@ -7,7 +7,7 @@
 SETLOCAL ENABLEEXTENSIONS ENABLEDELAYEDEXPANSION
 
 :: variables
-SET rootdir=%~dp0
+SET rootdir=%~dps0
 :: Library to parse JSON
 SET jq=%rootdir%_internal\tools\jq\jq
 :: Redis executable directory

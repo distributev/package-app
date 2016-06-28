@@ -8,3 +8,4 @@ dist
 npm-debug.log
 coverage
 theapp-template/TheApp/_internal/app
+.temp

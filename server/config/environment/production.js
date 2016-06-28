@@ -15,6 +15,6 @@ module.exports = {
 
   // Bookshelf connection options
   bookshelf: {
-    filename: './dist.sqlite'
+    filename: './_internal/data/dist.sqlite'
   }
 };

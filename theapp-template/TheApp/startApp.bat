@@ -8,13 +8,13 @@ SET NODE_ENV=production
 SETLOCAL ENABLEEXTENSIONS ENABLEDELAYEDEXPANSION
 
 :: variables
-SET rootdir=%~dp0
+SET rootdir=%~dps0
 :: NodeJS
 SET node=%rootdir%_internal\runtime\nodejs\nodejs
 
-%node% startApp.js
+%node% %rootdir%startApp.js
 
-PAUSE
+:: PAUSE
 ECHO ON
 
 
