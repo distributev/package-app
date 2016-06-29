@@ -6,9 +6,8 @@
 @ECHO OFF
 SETLOCAL ENABLEEXTENSIONS ENABLEDELAYEDEXPANSION
 
-:: Get pid of startApp node process for graceful termination
-FOR /F "tokens=*" %%i IN (app.pid) DO @SET pid=%%i
-TASKKILL /F /PID %pid%
+:: Kill nodejs.exe for graceful termination
+TASKKILL /F /PID nodejs.exe
 
 :: PAUSE
 ECHO ON

@@ -15,6 +15,6 @@ module.exports = {
 
   // Bookshelf connection options
   bookshelf: {
-    filename: './_internal/data/dist.sqlite'
+    filename: require('path').join(__dirname, '../../../../data/dist.sqlite')
   }
 };
