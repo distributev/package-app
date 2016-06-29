@@ -2,6 +2,9 @@
 
 // Production specific configuration
 // =================================
+
+var dbConfig = require('../../../../../config/databases/datasources.json').mailmerge;
+
 module.exports = {
   // Server IP
   ip:     process.env.OPENSHIFT_NODEJS_IP ||
@@ -15,6 +18,6 @@ module.exports = {
 
   // Bookshelf connection options
   bookshelf: {
-    filename: require('path').join(__dirname, '../../../../data/dist.sqlite')
+    filename: dbConfig.storage
   }
 };
