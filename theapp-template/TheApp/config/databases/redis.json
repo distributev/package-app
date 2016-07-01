@@ -1,7 +1,7 @@
 {
   "redis": {
     "port": 4321,
-    "host": "127.0.0.1",
+    "host": "bundled",
     "auth": null
   }
 }
