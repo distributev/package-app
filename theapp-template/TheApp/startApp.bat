@@ -12,10 +12,9 @@ SET rootdir=%~dps0
 :: NodeJS
 SET node=%rootdir%_internal\runtime\nodejs\nodejs
 
-:: %node% %rootdir%startApp.js
 %node% %rootdir%_internal\app\server
 
-PAUSE
+:: PAUSE
 ECHO ON
 
 
