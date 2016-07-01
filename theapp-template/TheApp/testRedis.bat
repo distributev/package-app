@@ -20,21 +20,21 @@ SET redisconfig=%rootdir%config\databases\redis.json
 CALL %rootdir%setvars.bat
 del %rootdir%setvars.bat
 
-ECHO Redis Host %redishost%:%redisport%
+ECHO Redis Host 127.0.0.1:%redisport%
 
 :: Testing Redis
 ECHO Inserting key1="Hello": SET key1 "Hello"
-%redispath%redis-cli -h %redishost% -p %redisport% -a %redisauth% SET key1 "Hello"
+%redispath%redis-cli -p %redisport% -a %redisauth% SET key1 "Hello"
 ECHO Getting value of key1: GET key1
-%redispath%redis-cli -h %redishost% -p %redisport% -a %redisauth% GET key1
+%redispath%redis-cli -p %redisport% -a %redisauth% GET key1
 ECHO Appeding " World" to the value of key1: APPEND key1 " World"
-%redispath%redis-cli -h %redishost% -p %redisport% -a %redisauth% APPEND key1 " World"
+%redispath%redis-cli -p %redisport% -a %redisauth% APPEND key1 " World"
 ECHO Getting new value of key1: GET key1
-%redispath%redis-cli -h %redishost% -p %redisport% -a %redisauth% GET key1
+%redispath%redis-cli -p %redisport% -a %redisauth% GET key1
 ECHO Deleting key1: DEL key1
-%redispath%redis-cli -h %redishost% -p %redisport% -a %redisauth% DEL key1
+%redispath%redis-cli -p %redisport% -a %redisauth% DEL key1
 ECHO Verifying key1 was deleted: GET key1
-%redispath%redis-cli -h %redishost% -p %redisport% -a %redisauth% GET key1
+%redispath%redis-cli -p %redisport% -a %redisauth% GET key1
 
 PAUSE
 ECHO ON
