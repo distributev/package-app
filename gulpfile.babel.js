@@ -616,41 +616,6 @@ gulp.task('test:e2e', ['env:all', 'env:test', 'start:server', 'webdriver_update'
         });
 });
 
-gulp.task('package:clean', () => del([paths.package.temp], {dot: true}));
-
-gulp.task('package:copy:template', () => {
-    return gulp.src(`${paths.package.template}/**/*`)
-        .pipe(gulp.dest(`${paths.package.temp}/TheApp`));
-});
-
-gulp.task('package:copy:dist', () => {
-    return gulp.src(`${paths.dist}/**/*`)
-        .pipe(gulp.dest(`${paths.package.temp}/TheApp/${paths.package.app}`));
-});
-
-gulp.task('package:install', () => {
-    return gulp.src([`${paths.package.temp}/TheApp/${paths.package.app}/package.json`])
-        .pipe(install({production: true}));
-});
-
-gulp.task('package:createzip', () => {
-    return gulp.src(`${paths.package.temp}/TheApp/**/*`)
-        .pipe(zip('theapp.zip'))
-        .pipe(gulp.dest(paths.dist));
-});
-
-gulp.task('package:zip', cb => {
-    runSequence(
-        'build',
-        'package:clean',
-        'package:copy:template',
-        'package:copy:dist',
-        'package:install',
-        'package:createzip',
-        'package:clean',
-        cb);
-});
-
 /********************
  * Grunt ported tasks
  ********************/
@@ -694,4 +659,43 @@ gulp.task('buildcontrol:openshift', function(done) {
         {gruntfile: false}, //don't look for a Gruntfile - there is none. :-)
         function() {done();}
     );
+});
+
+/********************
+ * Custom tasks
+ ********************/
+
+gulp.task('package:clean', () => del([paths.package.temp], {dot: true}));
+
+gulp.task('package:copy:template', () => {
+    return gulp.src(`${paths.package.template}/**/*`)
+        .pipe(gulp.dest(`${paths.package.temp}/TheApp`));
+});
+
+gulp.task('package:copy:dist', () => {
+    return gulp.src(`${paths.dist}/**/*`)
+        .pipe(gulp.dest(`${paths.package.temp}/TheApp/${paths.package.app}`));
+});
+
+gulp.task('package:install', () => {
+    return gulp.src([`${paths.package.temp}/TheApp/${paths.package.app}/package.json`])
+        .pipe(install({production: true}));
+});
+
+gulp.task('package:createzip', () => {
+    return gulp.src(`${paths.package.temp}/TheApp/**/*`)
+        .pipe(zip('theapp.zip'))
+        .pipe(gulp.dest(paths.dist));
+});
+
+gulp.task('package:zip', cb => {
+    runSequence(
+        'build',
+        'package:clean',
+        'package:copy:template',
+        'package:copy:dist',
+        'package:install',
+        'package:createzip',
+        'package:clean',
+        cb);
 });
