@@ -10,3 +10,4 @@ coverage
 theapp-template/TheApp/_internal/app
 .temp
 !theapp-template/TheApp/_internal/runtime/nodejs/node_modules
+**/*.sqlite

@@ -4,27 +4,31 @@
 
 'use strict';
 
-var path = require('path');
+import path from 'path';
+import os from 'os';
+import fs from 'fs';
+import config from './config/environment';
+
 var spawn = require('child_process').spawn;
-var os = require('os');
-var fs = require('fs');
-var redisPath = path.join(__dirname,'../../tools/redis2.8.2400-xp32bit');
 
 export default function(app) {
   var env = app.get('env');
-  // Check if os is windows, and that env is production before proceding
-  if (os.platform() === 'win32' && env === 'production') {
+  // Check if os is windows
+  if (os.platform() === 'win32') {
     // Get the redis config
-    var redisConfigPath = path.join(__dirname, '../../../config/databases/redis.json');
-    var redisConfig = require(redisConfigPath);
-    // Check if redisConfig file exists
-    fs.access(redisConfigPath, fs.F_OK, function (err) {
-      if (!err) {
+    var exePath = path.join(config.root, config.redis.exePath);
+    var configPath = path.join(config.root, config.redis.configPath);
+    // Check if redis config file exists
+    fs.access(configPath, fs.F_OK, function (err) {
+      if (err) {
+        console.log(err);
+      }
+      else {
+        var redisConfig = require(configPath);
         // Check if the bundled redis should be started
         if (redisConfig.redis && redisConfig.redis.host === 'bundled') {
           // Start the redis server
-          var redis = spawn(path.join(redisPath, 'redis-server'), [path.join(redisPath, 'redis.windows.conf'), '--port', redisConfig.redis.port || 4321]);
-
+          var redis = spawn(path.join(exePath, 'redis-server'), [path.join(exePath, 'redis.windows.conf'), '--port', redisConfig.redis.port || 4321]);
           redis.on('exit', function (code) {
             console.log('Redis server terminated with exit code: ' + code);
           });

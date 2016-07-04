@@ -18,6 +18,7 @@ import {protractor, webdriver_update} from 'gulp-protractor';
 import {Instrumenter} from 'isparta';
 import install from 'gulp-install';
 import zip from 'gulp-zip';
+import replace from 'gulp-replace';
 
 var plugins = gulpLoadPlugins();
 var config;
@@ -677,6 +678,12 @@ gulp.task('package:copy:dist', () => {
         .pipe(gulp.dest(`${paths.package.temp}/TheApp/${paths.package.app}`));
 });
 
+gulp.task('package:update:env', () => {
+    return gulp.src([`${paths.package.temp}/TheApp/${paths.package.app}/server/config/environment/production.js`], {base: './'})
+        .pipe(replace(`${paths.package.template}/`, '../'))
+        .pipe(gulp.dest('./'));
+});
+
 gulp.task('package:install', () => {
     return gulp.src([`${paths.package.temp}/TheApp/${paths.package.app}/package.json`])
         .pipe(install({production: true}));
@@ -695,7 +702,8 @@ gulp.task('package:zip', cb => {
         'package:copy:template',
         'package:copy:dist',
         'package:install',
+        'package:update:env',
         'package:createzip',
-        'package:clean',
+        // 'package:clean',
         cb);
 });
